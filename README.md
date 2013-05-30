@@ -27,6 +27,8 @@ Options
  * spinOnLoad: If set to true, spinner starts automatically on page load.
  * done: Callback that is called when the spinner has stopped spinning.
 
+See index.html for a demo of this plug-in.
+
 Copyright (c) 2013 Jude Osborn
 
 Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
