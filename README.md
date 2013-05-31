@@ -25,7 +25,7 @@ Options
  * startButton: A JQuery element to act as a button that starts the spinner.
  * stopButton: A JQuery element to act as a button that stops the spinner.
  * spinOnLoad: If set to true, spinner starts automatically on page load.
- * done: Callback that is called when the spinner has stopped spinning.
+ * done: Callback that is called when the spinner has stopped spinning. Passes the randomized text as a parameter.
 
 See index.html for a demo of this plug-in.
 

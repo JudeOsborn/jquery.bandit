@@ -25,7 +25,8 @@
 *  - startButton: A JQuery element to act as a button that starts the spinner.
 *  - stopButton: A JQuery element to act as a button that stops the spinner.
 *  - spinOnLoad: If set to true, spinner starts automatically on page load.
-*  - done: Callback that is called when the spinner has stopped spinning.
+*  - done: Callback that is called when the spinner has stopped spinning. Passes the
+			randomized text as a parameter.
 *
 * Copyright (c) 2013 Jude Osborn
 *
@@ -141,7 +142,7 @@
 							spin();
 						} else {
 							$this.stop();
-							settings.done();
+							settings.done($this.children().first().html());
 							$spinButton.removeAttr('disabled');
 							$stopButton.removeAttr('disabled');
 						}
@@ -159,6 +160,11 @@
 	};
 
 	function empty() {}
+
+	function getParameterByName(name) {
+		var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+		return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+	}
 
 	function getRandom(min, max) {
 	    return min + Math.floor(Math.random() * (max - min + 1));
