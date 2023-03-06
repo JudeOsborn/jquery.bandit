@@ -8,19 +8,19 @@
 * Apply to a list-like element like this:
 *	$('ul').bandit();
 *
-* Note that a call without any parameters will not add any spinning functionality. 
+* Note that a call without any parameters will not add any spinning functionality.
 * Either use the "spinOnLoad" option (see options below) to load the spinner when
-* the page loads, or use the "startButton" option to indicate a button that starts 
+* the page loads, or use the "startButton" option to indicate a button that starts
 * spinning.
 
 * Options:
-*  - speed: The spinning speed in milliseconds. Optionally, an array of two values 
+*  - speed: The spinning speed in milliseconds. Optionally, an array of two values
 		will randomly select a speed between those values. For example, [100, 200].
 *  - delay: Number of milliseconds before the spinner starts spinning.
 *  - accel: The speed at which the spinner accelerates.
 *  - decel: The speed at which the spinner decelerates.
-*  - autoStop: Number of milliseconds before the spinner stop spinning, or 0 to spin 
-*		forever. Optionally, an array of two values will randomly stop the spinner 
+*  - autoStop: Number of milliseconds before the spinner stop spinning, or 0 to spin
+*		forever. Optionally, an array of two values will randomly stop the spinner
 * 		after a randomly selected number of milliseconds. For example, [2000, 3000].
 *  - startButton: A JQuery element to act as a button that starts the spinner.
 *  - stopButton: A JQuery element to act as a button that stops the spinner.
@@ -33,8 +33,8 @@
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
 */
 
-(function($) {
-	$.fn.bandit = function(options) {
+(function ($) {
+	$.fn.bandit = function (options) {
 		var settings = {
 			speed: '150',
 			delay: 2000,
@@ -53,21 +53,21 @@
 
 		var $document = $(document);
 
-		return this.each(function() {
+		return this.each(function () {
 			var $this = $(this),
 				totalItems = $this.children().length,
 				currentItemBlock = 'first',
 				speed = settings.speed,
 				topSpeed = 0,
 				stopping = false,
-				$spinButton = $(document).find(settings.spinButton),
+				$spinButton = $(document).find(settings.startButton),
 				$stopButton = $(document).find(settings.stopButton);
 
-			$spinButton.click(function(e) {
+			$spinButton.click(function (e) {
 				startSpin();
 			});
 
-			$stopButton.click(function(e) {
+			$stopButton.click(function (e) {
 				if (settings.delay > 0) {
 					setTimeout(stop, settings.delay);
 				} else {
@@ -77,14 +77,14 @@
 
 			function startSpin() {
 				$spinButton.attr('disabled', 'disabled');
-				
+
 				speed = settings.accel;
 
 				// See if we need to randomize the top speed.
 				if (settings.speed instanceof Array) {
 					topSpeed = getRandom(settings.speed[0], settings.speed[1]);
 				} else {
-					topSpeed = settings.speed;					
+					topSpeed = settings.speed;
 				}
 
 				stopping = false;
@@ -105,7 +105,7 @@
 
 				if (autoStop > 0) {
 					setTimeout(stop, autoStop);
-				}				
+				}
 			}
 
 			function stop() {
@@ -124,7 +124,7 @@
 				$this.animate({
 					top: '-=' + itemHeight
 				}, {
-					complete: function() {
+					complete: function () {
 						$this.append($item);
 						$this.css('top', 0);
 
@@ -159,7 +159,7 @@
 		});
 	};
 
-	function empty() {}
+	function empty() { }
 
 	function getParameterByName(name) {
 		var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -167,6 +167,6 @@
 	}
 
 	function getRandom(min, max) {
-	    return min + Math.floor(Math.random() * (max - min + 1));
+		return min + Math.floor(Math.random() * (max - min + 1));
 	}
 }(jQuery));
